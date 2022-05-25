@@ -2,6 +2,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
+from dash.dependencies import Input, Output, State
 import pandas as pd
 
 ########### Define your variables ######
@@ -26,21 +27,7 @@ githublink = 'https://github.com/austinlasseter/dash-map-usa-agriculture'
 import pandas as pd
 df = pd.read_csv('assets/usa-2011-agriculture.csv')
 
-fig = go.Figure(data=go.Choropleth(
-    locations=df['code'], # Spatial coordinates
-    z = df[mycolumn].astype(float), # Data to be color-coded
-    locationmode = 'USA-states', # set of locations match entries in `locations`
-    colorscale = mycolorscale,
-    colorbar_title = mycolorbartitle,
-))
-
-fig.update_layout(
-    title_text = mygraphtitle,
-    geo_scope='usa',
-    width=1200,
-    height=800
-)
-
+    
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -51,6 +38,7 @@ app.title=tabtitle
 
 app.layout = html.Div(children=[
     html.H1(myheading1),
+    # add dropdown to list all column values
     dcc.Dropdown(id='my-first-dropdown', # name this baby
                  options=[{'label': item, 'value': item} for item in list_of_columns], # create list of values on the dropdown from available columns
                  value='corn' # set initial value
@@ -65,6 +53,24 @@ app.layout = html.Div(children=[
     ]
 )
 
+# Creating a callback that essentially links the dropdown value with the function
+@app.callback(Output('figure-1', 'figure'), [Input('options-drop', 'value')])
+def make_chart(value):   # Encapsulate the chart creation in a function that will be automatically called whenever the dropdown value changes
+    fig = go.Figure(data=go.Choropleth(
+        locations=df['code'], # Spatial coordinates
+        z = df[value].astype(float), # Data to be color-coded
+        locationmode = 'USA-states', # set of locations match entries in `locations`
+        colorscale = mycolorscale,
+        colorbar_title = mycolorbartitle,
+    ))
+
+    fig.update_layout(
+        title_text = mygraphtitle,
+        geo_scope='usa',
+        width=1200,
+        height=800
+    )
+# ################
 ############ Deploy
 if __name__ == '__main__':
     app.run_server()
