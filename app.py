@@ -44,8 +44,7 @@ app.layout = html.Div(children=[
                  value='corn' # set initial value
                 ),
     dcc.Graph(
-        id='figure-1',
-        figure=fig
+        id='figure-1'
     ),
     html.A('Code on Github', href=githublink),
     html.Br(),
