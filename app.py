@@ -8,8 +8,9 @@ import pandas as pd
 ########### Define your variables ######
 
 # here's the list of possible columns to choose from.
-list_of_columns =['code', 'state', 'category', 'total exports', 'beef', 'pork', 'poultry',
-       'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
+list_of_columns =[ #'code', 'state', 'category', 
+                  'total exports', 'beef', 'pork', 'poultry',
+    'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
        'veggies proc', 'total veggies', 'corn', 'wheat', 'cotton']
 
 mycolumn='corn'
