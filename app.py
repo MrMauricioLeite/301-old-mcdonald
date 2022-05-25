@@ -51,8 +51,9 @@ app.title=tabtitle
 
 app.layout = html.Div(children=[
     html.H1(myheading1),
-    dcc.Dropdown(id='my-first-dropdown', options=[{'label': item, 'value': item} for item in list_of_columns],
-                    value='corn'
+    dcc.Dropdown(id='my-first-dropdown', # name this baby
+                 options=[{'label': item, 'value': item} for item in list_of_columns], # create list of values on the dropdown from available columns
+                 value='corn' # set initial value
                 ),
     dcc.Graph(
         id='figure-1',
