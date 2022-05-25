@@ -38,7 +38,7 @@ app.title=tabtitle
 ########### Set up the layout
 
 app.layout = html.Div(children=[
-    html.H1(myheading1),
+    html.H1(id='my-title'),
     # add dropdown to list all column values
     dcc.Dropdown(id='my-first-dropdown', # name this baby
                  options=[{'label': item, 'value': item} for item in list_of_columns], # create list of values on the dropdown from available columns
@@ -72,6 +72,10 @@ def make_chart(value):   # Encapsulate the chart creation in a function that wil
     )
     
     return fig
+
+@app.callback(Output('my-output','children'),[Input('my-first-dropdown', 'value')])
+deef update_title_div(value):
+    return f"Wow! That's a lot of {value}!"
 
 # ################
 ############ Deploy
