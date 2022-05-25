@@ -54,7 +54,7 @@ app.layout = html.Div(children=[
 )
 
 # Creating a callback that essentially links the dropdown value with the function
-@app.callback(Output('figure-1', 'figure'), [Input('options-drop', 'value')])
+@app.callback(Output('figure-1', 'figure'), [Input('my-first-dropdown', 'value')])
 def make_chart(value):   # Encapsulate the chart creation in a function that will be automatically called whenever the dropdown value changes
     fig = go.Figure(data=go.Choropleth(
         locations=df['code'], # Spatial coordinates
@@ -70,6 +70,9 @@ def make_chart(value):   # Encapsulate the chart creation in a function that wil
         width=1200,
         height=800
     )
+    
+    return fig
+
 # ################
 ############ Deploy
 if __name__ == '__main__':
