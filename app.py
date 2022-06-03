@@ -74,7 +74,7 @@ def make_chart(value):   # Encapsulate the chart creation in a function that wil
     return fig
 
 @app.callback(Output('my-output','children'),[Input('my-first-dropdown', 'value')])
-deef update_title_div(value):
+def update_title_div(value):
     return f"Wow! That's a lot of {value}!"
 
 # ################
